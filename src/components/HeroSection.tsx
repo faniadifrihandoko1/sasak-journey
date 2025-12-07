@@ -74,15 +74,35 @@ export default function HeroSection() {
       />
 
       {/* Content */}
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, py: 8 }}>
-        <Box sx={{ textAlign: "center", mb: 6 }}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          py: { xs: 4, md: 8 },
+          px: { xs: 2, sm: 3, md: 4 },
+        }}
+      >
+        <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
           <Typography
             variant="h1"
             sx={{
               color: "white",
               fontWeight: 700,
-              mb: 3,
+              mb: { xs: 2, md: 3 },
               textShadow: "2px 2px 8px rgba(0, 0, 0, 0.5)",
+              fontSize: {
+                xs: "1.75rem",
+                sm: "2.25rem",
+                md: "3rem",
+                lg: "3.5rem",
+              },
+              lineHeight: {
+                xs: 1.2,
+                sm: 1.3,
+                md: 1.2,
+              },
+              px: { xs: 1, sm: 2 },
             }}
           >
             {t("headline")}
@@ -95,6 +115,18 @@ export default function HeroSection() {
               maxWidth: "800px",
               mx: "auto",
               textShadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
+              fontSize: {
+                xs: "0.875rem",
+                sm: "1rem",
+                md: "1.25rem",
+              },
+              lineHeight: {
+                xs: 1.5,
+                sm: 1.6,
+                md: 1.5,
+              },
+              px: { xs: 1.5, sm: 2 },
+              mt: { xs: 1, md: 0 },
             }}
           >
             {t("subheadline")}
@@ -105,8 +137,8 @@ export default function HeroSection() {
         <Paper
           elevation={24}
           sx={{
-            p: { xs: 2.5, md: 3 },
-            borderRadius: 3,
+            p: { xs: 2, sm: 2.5, md: 3 },
+            borderRadius: { xs: 2, md: 3 },
             backgroundColor: "rgba(255, 255, 255, 0.98)",
             backdropFilter: "blur(20px)",
             maxWidth: "950px",
