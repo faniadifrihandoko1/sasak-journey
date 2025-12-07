@@ -1,0 +1,102 @@
+{
+  "navbar": {
+    "logo": "Sasak Journey",
+    "home": "Beranda",
+    "destinations": "Destinasi",
+    "aboutUs": "Tentang Kami",
+    "testimonials": "Testimoni",
+    "contact": "Kontak",
+    "bookNow": "Pesan Sekarang",
+    "destinationsSubmenu": {
+      "giliIslands": "Kepulauan Gili",
+      "mountRinjani": "Gunung Rinjani",
+      "southernBeaches": "Pantai Selatan"
+    }
+  },
+  "hero": {
+    "headline": "Jelajahi Surga Tersembunyi: Lombok Menanti Anda",
+    "subheadline": "Temukan keindahan budaya Sasak, pantai yang tak berujung, dan puncak Gunung Rinjani bersama Sasak Journey.",
+    "searchForm": {
+      "travelCategory": "Kategori Perjalanan",
+      "selectDestination": "Pilih Destinasi",
+      "duration": "Durasi",
+      "findYourJourney": "Cari",
+      "categories": {
+        "beach": "Liburan Pantai",
+        "mountain": "Pendakian Gunung",
+        "culture": "Budaya & Sejarah",
+        "adventure": "Tur Petualangan"
+      },
+      "destinations": {
+        "giliTrawangan": "Gili Trawangan",
+        "mataram": "Tur Kota Mataram",
+        "sembalun": "Sembalun - Rinjani",
+        "kutaMandalika": "Kuta Mandalika",
+        "pinkBeach": "Pantai Pink",
+        "mereseHill": "Bukit Merese"
+      },
+      "durations": {
+        "3d2n": "3 Hari / 2 Malam",
+        "5d4n": "5 Hari / 4 Malam",
+        "7d6n": "7 Hari / 6 Malam",
+        "7plus": "Lebih dari 7 Hari"
+      }
+    }
+  },
+  "whyChooseUs": {
+    "title": "Mengapa Memilih Kami",
+    "subtitle": "Rasakan Lombok seperti belum pernah sebelumnya dengan layanan perjalanan terpercaya kami",
+    "features": {
+      "localExpertise": {
+        "title": "Keahlian Lokal",
+        "description": "Tim kami terdiri dari pemandu lokal yang mengetahui setiap tempat tersembunyi dan spot rahasia di Pulau Lombok."
+      },
+      "bestPrice": {
+        "title": "Garansi Harga Terbaik",
+        "description": "Kami menawarkan harga kompetitif tanpa biaya tersembunyi. Menemukan penawaran yang lebih baik? Kami akan menyamainya!"
+      },
+      "support24": {
+        "title": "Dukungan 24/7",
+        "description": "Tim dukungan pelanggan kami tersedia sepanjang waktu untuk membantu Anda dengan pertanyaan atau kekhawatiran apa pun."
+      }
+    }
+  },
+  "destinations": {
+    "title": "Destinasi Populer",
+    "subtitle": "Temukan destinasi paling dicari di Lombok",
+    "viewDetails": "Lihat Detail",
+    "from": "Mulai dari",
+    "items": {
+      "giliTrawangan": {
+        "name": "Gili Trawangan",
+        "description": "Air jernih, kehidupan malam yang semarak, dan matahari terbenam yang menakjubkan menanti Anda.",
+        "price": "299"
+      },
+      "mountRinjani": {
+        "name": "Pendakian Gunung Rinjani",
+        "description": "Tantang diri Anda dengan pendakian yang tak terlupakan ke puncak Gunung Rinjani.",
+        "price": "399"
+      },
+      "kutaMandalika": {
+        "name": "Kuta Mandalika",
+        "description": "Pantai yang masih asri, sempurna untuk berselancar, relaksasi, dan olahraga air.",
+        "price": "249"
+      },
+      "pinkBeach": {
+        "name": "Pantai Pink",
+        "description": "Rasakan keunikan pantai berpasir pink, keajaiban alam Lombok.",
+        "price": "199"
+      },
+      "sembalunValley": {
+        "name": "Lembah Sembalun",
+        "description": "Jelajahi lembah dataran tinggi yang indah dengan teras sawah dan pemandangan gunung yang menakjubkan.",
+        "price": "349"
+      },
+      "mereseHill": {
+        "name": "Bukit Merese",
+        "description": "Saksikan pemandangan panorama yang menakjubkan dari lautan dan pulau-pulau sekitarnya.",
+        "price": "179"
+      }
+    }
+  }
+}

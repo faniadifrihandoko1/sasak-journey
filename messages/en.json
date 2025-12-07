@@ -1,0 +1,102 @@
+{
+  "navbar": {
+    "logo": "Sasak Journey",
+    "home": "Home",
+    "destinations": "Destinations",
+    "aboutUs": "About Us",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "bookNow": "Book Now",
+    "destinationsSubmenu": {
+      "giliIslands": "Gili Islands",
+      "mountRinjani": "Mount Rinjani",
+      "southernBeaches": "Southern Beaches"
+    }
+  },
+  "hero": {
+    "headline": "Explore the Hidden Paradise: Lombok Awaits You",
+    "subheadline": "Discover the beauty of Sasak culture, endless beaches, and the peak of Mount Rinjani with Sasak Journey.",
+    "searchForm": {
+      "travelCategory": "Travel Category",
+      "selectDestination": "Select Destination",
+      "duration": "Duration",
+      "findYourJourney": "Search",
+      "categories": {
+        "beach": "Beach Holidays",
+        "mountain": "Mountain Trekking",
+        "culture": "Culture & History",
+        "adventure": "Adventure Tours"
+      },
+      "destinations": {
+        "giliTrawangan": "Gili Trawangan",
+        "mataram": "Mataram City Tour",
+        "sembalun": "Sembalun - Rinjani",
+        "kutaMandalika": "Kuta Mandalika",
+        "pinkBeach": "Pink Beach",
+        "mereseHill": "Merese Hill"
+      },
+      "durations": {
+        "3d2n": "3 Days / 2 Nights",
+        "5d4n": "5 Days / 4 Nights",
+        "7d6n": "7 Days / 6 Nights",
+        "7plus": "More than 7 Days"
+      }
+    }
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "subtitle": "Experience Lombok like never before with our trusted travel services",
+    "features": {
+      "localExpertise": {
+        "title": "Local Expertise",
+        "description": "Our team consists of local guides who know every hidden gem and secret spot on Lombok Island."
+      },
+      "bestPrice": {
+        "title": "Best Price Guarantee",
+        "description": "We offer competitive prices with no hidden fees. Find a better deal? We'll match it!"
+      },
+      "support24": {
+        "title": "24/7 Support",
+        "description": "Our customer support team is available around the clock to assist you with any questions or concerns."
+      }
+    }
+  },
+  "destinations": {
+    "title": "Popular Destinations",
+    "subtitle": "Discover the most sought-after destinations in Lombok",
+    "viewDetails": "View Details",
+    "from": "From",
+    "items": {
+      "giliTrawangan": {
+        "name": "Gili Trawangan",
+        "description": "Crystal clear waters, vibrant nightlife, and stunning sunsets await you.",
+        "price": "299"
+      },
+      "mountRinjani": {
+        "name": "Mount Rinjani Trek",
+        "description": "Challenge yourself with an unforgettable trek to the summit of Mount Rinjani.",
+        "price": "399"
+      },
+      "kutaMandalika": {
+        "name": "Kuta Mandalika",
+        "description": "Pristine beaches perfect for surfing, relaxation, and water sports.",
+        "price": "249"
+      },
+      "pinkBeach": {
+        "name": "Pink Beach",
+        "description": "Experience the unique pink sand beaches, a natural wonder of Lombok.",
+        "price": "199"
+      },
+      "sembalunValley": {
+        "name": "Sembalun Valley",
+        "description": "Explore the beautiful highland valley with stunning rice terraces and mountain views.",
+        "price": "349"
+      },
+      "mereseHill": {
+        "name": "Merese Hill",
+        "description": "Witness breathtaking panoramic views of the ocean and surrounding islands.",
+        "price": "179"
+      }
+    }
+  }
+}
