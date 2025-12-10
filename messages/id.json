@@ -98,5 +98,72 @@
         "price": "179"
       }
     }
+  },
+  "searchResults": {
+    "title": "Hasil Pencarian",
+    "subtitle": "Ditemukan {count} paket yang sesuai dengan kriteria Anda",
+    "noResults": "Tidak ada paket yang ditemukan",
+    "noResultsDescription": "Coba sesuaikan filter pencarian Anda atau jelajahi destinasi populer kami",
+    "filters": {
+      "title": "Filter",
+      "category": "Kategori",
+      "destination": "Destinasi",
+      "duration": "Durasi",
+      "priceRange": "Rentang Harga",
+      "clearFilters": "Hapus Semua Filter"
+    },
+    "sortBy": {
+      "label": "Urutkan berdasarkan",
+      "priceLow": "Harga: Rendah ke Tinggi",
+      "priceHigh": "Harga: Tinggi ke Rendah",
+      "popular": "Paling Populer",
+      "newest": "Terbaru"
+    },
+    "packages": {
+      "perPerson": "per orang",
+      "duration": "Hari",
+      "nights": "Malam",
+      "viewDetails": "Lihat Detail",
+      "bookNow": "Pesan Sekarang"
+    }
+  },
+  "destinationDetail": {
+    "title": "Detail Destinasi",
+    "overview": "Ringkasan",
+    "highlights": "Poin Menarik",
+    "itinerary": "Rencana Perjalanan",
+    "included": "Yang Termasuk",
+    "excluded": "Yang Tidak Termasuk",
+    "pricing": "Harga",
+    "gallery": "Galeri",
+    "reviews": "Ulasan",
+    "relatedDestinations": "Destinasi Terkait",
+    "bookNow": "Pesan Sekarang",
+    "contactUs": "Hubungi Kami",
+    "perPerson": "per orang",
+    "days": "Hari",
+    "nights": "Malam",
+    "rating": "Rating",
+    "reviewsCount": "{count} Ulasan",
+    "startingFrom": "Mulai dari",
+    "readMore": "Baca Selengkapnya",
+    "readLess": "Baca Lebih Sedikit",
+    "day": "Hari",
+    "items": {
+      "included": {
+        "accommodation": "Akomodasi",
+        "meals": "Makanan",
+        "transportation": "Transportasi",
+        "guide": "Pemandu Profesional",
+        "entrance": "Tiket Masuk",
+        "insurance": "Asuransi Perjalanan"
+      },
+      "excluded": {
+        "flights": "Tiket Pesawat Internasional",
+        "personal": "Pengeluaran Pribadi",
+        "tips": "Tips & Gratifikasi",
+        "optional": "Aktivitas Opsional"
+      }
+    }
   }
 }

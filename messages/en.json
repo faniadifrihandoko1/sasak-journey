@@ -98,5 +98,72 @@
         "price": "179"
       }
     }
+  },
+  "searchResults": {
+    "title": "Search Results",
+    "subtitle": "Found {count} packages matching your criteria",
+    "noResults": "No packages found",
+    "noResultsDescription": "Try adjusting your search filters or explore our popular destinations",
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "destination": "Destination",
+      "duration": "Duration",
+      "priceRange": "Price Range",
+      "clearFilters": "Clear All"
+    },
+    "sortBy": {
+      "label": "Sort by",
+      "priceLow": "Price: Low to High",
+      "priceHigh": "Price: High to Low",
+      "popular": "Most Popular",
+      "newest": "Newest"
+    },
+    "packages": {
+      "perPerson": "per person",
+      "duration": "Days",
+      "nights": "Nights",
+      "viewDetails": "View Details",
+      "bookNow": "Book Now"
+    }
+  },
+  "destinationDetail": {
+    "title": "Destination Details",
+    "overview": "Overview",
+    "highlights": "Highlights",
+    "itinerary": "Itinerary",
+    "included": "What's Included",
+    "excluded": "What's Excluded",
+    "pricing": "Pricing",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "relatedDestinations": "Related Destinations",
+    "bookNow": "Book Now",
+    "contactUs": "Contact Us",
+    "perPerson": "per person",
+    "days": "Days",
+    "nights": "Nights",
+    "rating": "Rating",
+    "reviewsCount": "{count} Reviews",
+    "startingFrom": "Starting from",
+    "readMore": "Read More",
+    "readLess": "Read Less",
+    "day": "Day",
+    "items": {
+      "included": {
+        "accommodation": "Accommodation",
+        "meals": "Meals",
+        "transportation": "Transportation",
+        "guide": "Professional Guide",
+        "entrance": "Entrance Fees",
+        "insurance": "Travel Insurance"
+      },
+      "excluded": {
+        "flights": "International Flights",
+        "personal": "Personal Expenses",
+        "tips": "Tips & Gratuities",
+        "optional": "Optional Activities"
+      }
+    }
   }
 }

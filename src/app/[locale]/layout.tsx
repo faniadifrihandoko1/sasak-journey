@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "../globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
+import Layout from "@/components/Layout";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
@@ -32,7 +33,9 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${montserrat.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <Layout>{children}</Layout>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

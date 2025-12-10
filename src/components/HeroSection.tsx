@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Box,
   Container,
@@ -8,7 +9,6 @@ import {
   FormControl,
   Select,
   MenuItem,
-  InputLabel,
   Button,
   Paper,
 } from "@mui/material";
@@ -20,11 +20,46 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import bgImage from "@/images/bg-color.jpg";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
   const tForm = useTranslations("hero.searchForm");
+  const router = useRouter();
+
+  const [category, setCategory] = useState("");
+  const [destination, setDestination] = useState("");
+  const [duration, setDuration] = useState("");
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    // Priority: category filter is the main filter for destinations page
+    if (category) {
+      params.set("category", category);
+    }
+    // If destination is selected, we can use it to filter by category
+    // Map destinations to their categories
+    if (destination && !category) {
+      const destinationCategoryMap: Record<string, string> = {
+        "gili-trawangan": "beach",
+        mataram: "culture",
+        sembalun: "mountain",
+        "kuta-mandalika": "beach",
+        "pink-beach": "adventure",
+        "merese-hill": "adventure",
+      };
+      const mappedCategory = destinationCategoryMap[destination];
+      if (mappedCategory) {
+        params.set("category", mappedCategory);
+      }
+    }
+    if (duration) {
+      params.set("duration", duration);
+    }
+
+    router.push(`/destinations?${params.toString()}`);
+  };
   return (
     <Box
       id="home"
@@ -92,7 +127,7 @@ export default function HeroSection() {
               mb: { xs: 2, md: 3 },
               textShadow: "2px 2px 8px rgba(0, 0, 0, 0.5)",
               fontSize: {
-                xs: "1.75rem",
+                xs: "2rem",
                 sm: "2.25rem",
                 md: "3rem",
                 lg: "3.5rem",
@@ -203,7 +238,8 @@ export default function HeroSection() {
                   >
                     <Select
                       displayEmpty
-                      defaultValue=""
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
                       renderValue={(selected) => {
                         if (!selected) {
                           return (
@@ -312,7 +348,8 @@ export default function HeroSection() {
                   >
                     <Select
                       displayEmpty
-                      defaultValue=""
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
                       renderValue={(selected) => {
                         if (!selected) {
                           return (
@@ -433,7 +470,8 @@ export default function HeroSection() {
                   >
                     <Select
                       displayEmpty
-                      defaultValue=""
+                      value={duration}
+                      onChange={(e) => setDuration(e.target.value)}
                       renderValue={(value) => {
                         if (!value) {
                           return (
@@ -493,6 +531,7 @@ export default function HeroSection() {
                 fullWidth
                 size="small"
                 startIcon={<SearchIcon sx={{ fontSize: 16 }} />}
+                onClick={handleSearch}
                 sx={{
                   height: "44px",
                   minHeight: "44px",

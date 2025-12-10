@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const destinationKeys = [
   "giliTrawangan",
@@ -21,6 +22,16 @@ const destinationKeys = [
   "sembalunValley",
   "mereseHill",
 ];
+
+// Map destination keys to slugs
+const destinationSlugs: Record<string, string> = {
+  giliTrawangan: "gili-trawangan",
+  mountRinjani: "mount-rinjani",
+  kutaMandalika: "kuta-mandalika",
+  pinkBeach: "pink-beach",
+  sembalunValley: "sembalun-valley",
+  mereseHill: "merese-hill",
+};
 
 const destinationImages = [
   "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=800",
@@ -124,7 +135,13 @@ export default function PopularDestinations() {
                     >
                       {t("from")} ${tItems(`${key}.price`)}
                     </Typography>
-                    <Button variant="contained" color="primary" size="small">
+                    <Button
+                      component={Link}
+                      href={`/destination/${destinationSlugs[key]}`}
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                    >
                       {t("viewDetails")}
                     </Button>
                   </Box>
