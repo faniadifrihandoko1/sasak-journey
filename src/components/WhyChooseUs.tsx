@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
         </Typography>
 
         <Grid container spacing={4}>
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <Grid size={{ xs: 12, md: 4 }} key={feature.key}>
               <Card
                 sx={{
