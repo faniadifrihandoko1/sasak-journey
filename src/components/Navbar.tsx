@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import logo from "@/images/logo-sasak.png";
+import CloseIcon from "@mui/icons-material/Close";
+import LanguageIcon from "@mui/icons-material/Language";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  Button,
   Box,
+  Button,
   Container,
   Drawer,
   IconButton,
@@ -16,14 +18,12 @@ import {
   ListItemText,
   ToggleButton,
   ToggleButtonGroup,
+  Toolbar,
+  Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-import LanguageIcon from "@mui/icons-material/Language";
-import logo from "@/images/logo-sasak.png";
-import Image from "next/image";
 import { useLocale } from "next-intl";
-import { useRouter, usePathname, Link } from "@/i18n/navigation";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Home", href: "/", key: "home", isExternal: false },
@@ -35,12 +35,17 @@ const navItems = [
   },
   { label: "About Us", href: "#about", key: "aboutUs", isExternal: true },
   {
-    label: "Testimonials",
-    href: "#testimonials",
-    key: "testimonials",
-    isExternal: true,
+    label: "Transportation",
+    href: "/transportation",
+    key: "transportation",
+    isExternal: false,
   },
-  { label: "Contact", href: "#contact", key: "contact", isExternal: true },
+  {
+    label: "Contact",
+    href: "/contact",
+    key: "contact",
+    isExternal: false,
+  },
 ];
 
 export default function Navbar() {
@@ -243,8 +248,8 @@ export default function Navbar() {
           backgroundColor: scrolled
             ? "rgba(255, 255, 255, 0.98)"
             : isHomePage
-            ? "transparent"
-            : "rgba(255, 255, 255, 0.98)",
+              ? "transparent"
+              : "rgba(255, 255, 255, 0.98)",
           boxShadow: scrolled ? "0 2px 20px rgba(0, 0, 0, 0.1)" : "none",
           transition: "all 0.3s ease",
           backdropFilter: scrolled ? "blur(10px)" : "none",
@@ -268,8 +273,8 @@ export default function Navbar() {
                 color: scrolled
                   ? "primary.main"
                   : isHomePage
-                  ? "white"
-                  : "primary.main",
+                    ? "white"
+                    : "primary.main",
                 textDecoration: "none",
                 transition: "color 0.3s ease",
                 cursor: "pointer",
@@ -296,10 +301,10 @@ export default function Navbar() {
                       color: active
                         ? "primary.main"
                         : scrolled
-                        ? "text.primary"
-                        : isHomePage
-                        ? "white"
-                        : "text.primary",
+                          ? "text.primary"
+                          : isHomePage
+                            ? "white"
+                            : "text.primary",
                       fontWeight: active ? 600 : 500,
                       textDecoration: "none",
                       position: "relative",
@@ -309,16 +314,16 @@ export default function Navbar() {
                       },
                       "&::after": active
                         ? {
-                            content: '""',
-                            position: "absolute",
-                            bottom: -4,
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            width: "60%",
-                            height: 2,
-                            backgroundColor: "primary.main",
-                            borderRadius: 1,
-                          }
+                          content: '""',
+                          position: "absolute",
+                          bottom: -4,
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          width: "60%",
+                          height: 2,
+                          backgroundColor: "primary.main",
+                          borderRadius: 1,
+                        }
                         : {},
                     }}
                   >
@@ -396,8 +401,8 @@ export default function Navbar() {
                 color: scrolled
                   ? "text.primary"
                   : isHomePage
-                  ? "white"
-                  : "text.primary",
+                    ? "white"
+                    : "text.primary",
               }}
             >
               <MenuIcon />

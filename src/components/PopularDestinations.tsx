@@ -1,49 +1,26 @@
 "use client";
 
+import { formatPrice, popularDestinations } from "@/data/destinations";
+import { Link } from "@/i18n/navigation";
+import { Place as PlaceIcon } from "@mui/icons-material";
 import {
   Box,
-  Container,
-  Typography,
-  Grid,
+  Button,
   Card,
   CardContent,
-  Button,
+  Chip,
+  Container,
+  Grid,
+  Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
-
-const destinationKeys = [
-  "giliTrawangan",
-  "mountRinjani",
-  "kutaMandalika",
-  "pinkBeach",
-  "sembalunValley",
-  "mereseHill",
-];
-
-// Map destination keys to slugs
-const destinationSlugs: Record<string, string> = {
-  giliTrawangan: "gili-trawangan",
-  mountRinjani: "mount-rinjani",
-  kutaMandalika: "kuta-mandalika",
-  pinkBeach: "pink-beach",
-  sembalunValley: "sembalun-valley",
-  mereseHill: "merese-hill",
-};
-
-const destinationImages = [
-  "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=800",
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800",
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
-  "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
-  "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
-  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
-];
+import Image from "next/image";
 
 export default function PopularDestinations() {
   const t = useTranslations("destinations");
   const tItems = useTranslations("destinations.items");
+  const tTags = useTranslations("destinations.tags");
+
   return (
     <Box
       id="destinations"
@@ -70,14 +47,19 @@ export default function PopularDestinations() {
         </Typography>
 
         <Grid container spacing={4}>
-          {destinationKeys.map((key, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={key}>
+          {popularDestinations.slice(0, 6).map((destination) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={destination.key}>
               <Card
                 sx={{
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
                   overflow: "hidden",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-8px)",
+                    boxShadow: "0 12px 40px rgba(0, 0, 0, 0.15)",
+                  },
                 }}
               >
                 <Box
@@ -95,13 +77,36 @@ export default function PopularDestinations() {
                   }}
                 >
                   <Image
-                    src={destinationImages[index]}
-                    alt={tItems(`${key}.name`)}
+                    src={destination.image}
+                    alt={tItems(`${destination.key}.title`)}
                     fill
                     style={{
                       objectFit: "cover",
                     }}
                   />
+                  {/* Location Badge */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: 12,
+                      left: 12,
+                      backgroundColor: "rgba(0, 0, 0, 0.7)",
+                      borderRadius: 2,
+                      px: 1.5,
+                      py: 0.5,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                    }}
+                  >
+                    <PlaceIcon sx={{ fontSize: 14, color: "white" }} />
+                    <Typography
+                      variant="caption"
+                      sx={{ color: "white", fontWeight: 500 }}
+                    >
+                      {destination.location}
+                    </Typography>
+                  </Box>
                 </Box>
                 <CardContent
                   sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
@@ -111,15 +116,34 @@ export default function PopularDestinations() {
                     component="h3"
                     sx={{ mb: 1, fontWeight: 600 }}
                   >
-                    {tItems(`${key}.name`)}
+                    {tItems(`${destination.key}.title`)}
                   </Typography>
+
                   <Typography
                     variant="body2"
                     color="text.secondary"
                     sx={{ mb: 2, flexGrow: 1 }}
                   >
-                    {tItems(`${key}.description`)}
+                    {tItems(`${destination.key}.description`)}
                   </Typography>
+
+                  {/* Tags */}
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, mb: 2 }}>
+                    {destination.tags.map((tag) => (
+                      <Chip
+                        key={tag}
+                        label={tTags(tag)}
+                        size="small"
+                        sx={{
+                          backgroundColor: "primary.light",
+                          color: "primary.dark",
+                          fontSize: "0.7rem",
+                          height: 24,
+                        }}
+                      />
+                    ))}
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -127,16 +151,22 @@ export default function PopularDestinations() {
                       alignItems: "center",
                     }}
                   >
-                    <Typography
-                      variant="h6"
-                      color="primary.main"
-                      fontWeight={600}
-                    >
-                      {t("from")} ${tItems(`${key}.price`)}
-                    </Typography>
+                    <Box>
+                      <Typography variant="caption" color="text.secondary">
+                        {t("from")}
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        color="primary.main"
+                        fontWeight={700}
+                        sx={{ lineHeight: 1.2 }}
+                      >
+                        {formatPrice(destination.priceFrom, destination.currency)}
+                      </Typography>
+                    </Box>
                     <Button
                       component={Link}
-                      href={`/destination/${destinationSlugs[key]}`}
+                      href={`/destination/${destination.slug}`}
                       variant="contained"
                       color="primary"
                       size="small"

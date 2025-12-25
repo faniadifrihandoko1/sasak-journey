@@ -1,27 +1,33 @@
 "use client";
 
-import { useState } from "react";
 import {
-  Box,
-  Container,
-  Typography,
-  Grid,
-  FormControl,
-  Select,
-  MenuItem,
-  Button,
-  Paper,
-} from "@mui/material";
-import {
-  Search as SearchIcon,
-  Category as CategoryIcon,
-  Place as PlaceIcon,
-  CalendarToday as CalendarIcon,
-} from "@mui/icons-material";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+  durations,
+  getDestinationsByCategory,
+  searchDestinations,
+  travelCategories,
+} from "@/data/destinations";
 import { useRouter } from "@/i18n/navigation";
 import bgImage from "@/images/bg-color.jpg";
+import {
+  CalendarToday as CalendarIcon,
+  Category as CategoryIcon,
+  Place as PlaceIcon,
+  Search as SearchIcon,
+} from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  Grid,
+  MenuItem,
+  Paper,
+  Select,
+  Typography,
+} from "@mui/material";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useMemo, useState } from "react";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
@@ -32,26 +38,37 @@ export default function HeroSection() {
   const [destination, setDestination] = useState("");
   const [duration, setDuration] = useState("");
 
+  // Filter destinations based on selected category
+  const filteredDestinations = useMemo(() => {
+    return getDestinationsByCategory(category);
+  }, [category]);
+
+  // Reset destination when category changes and destination is not in filtered list
+  const handleCategoryChange = (newCategory: string) => {
+    setCategory(newCategory);
+    // Check if current destination is still valid for new category
+    if (destination) {
+      const newFiltered = getDestinationsByCategory(newCategory);
+      const isStillValid = newFiltered.some((d) => d.id === destination);
+      if (!isStillValid) {
+        setDestination("");
+      }
+    }
+  };
+
   const handleSearch = () => {
     const params = new URLSearchParams();
-    // Priority: category filter is the main filter for destinations page
     if (category) {
       params.set("category", category);
     }
-    // If destination is selected, we can use it to filter by category
-    // Map destinations to their categories
-    if (destination && !category) {
-      const destinationCategoryMap: Record<string, string> = {
-        "gili-trawangan": "beach",
-        mataram: "culture",
-        sembalun: "mountain",
-        "kuta-mandalika": "beach",
-        "pink-beach": "adventure",
-        "merese-hill": "adventure",
-      };
-      const mappedCategory = destinationCategoryMap[destination];
-      if (mappedCategory) {
-        params.set("category", mappedCategory);
+    if (destination) {
+      params.set("destination", destination);
+      // If no category selected, use first category from destination
+      if (!category) {
+        const dest = searchDestinations.find((d) => d.id === destination);
+        if (dest && dest.categories.length > 0) {
+          params.set("category", dest.categories[0]);
+        }
       }
     }
     if (duration) {
@@ -60,6 +77,7 @@ export default function HeroSection() {
 
     router.push(`/destinations?${params.toString()}`);
   };
+
   return (
     <Box
       id="home"
@@ -95,7 +113,7 @@ export default function HeroSection() {
         />
       </Box>
 
-      {/* Dark Overlay (60-70% opacity) */}
+      {/* Dark Overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -132,11 +150,7 @@ export default function HeroSection() {
                 md: "3rem",
                 lg: "3.5rem",
               },
-              lineHeight: {
-                xs: 1.2,
-                sm: 1.3,
-                md: 1.2,
-              },
+              lineHeight: { xs: 1.2, sm: 1.3, md: 1.2 },
               px: { xs: 1, sm: 2 },
             }}
           >
@@ -150,16 +164,8 @@ export default function HeroSection() {
               maxWidth: "800px",
               mx: "auto",
               textShadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
-              fontSize: {
-                xs: "0.875rem",
-                sm: "1rem",
-                md: "1.25rem",
-              },
-              lineHeight: {
-                xs: 1.5,
-                sm: 1.6,
-                md: 1.5,
-              },
+              fontSize: { xs: "0.875rem", sm: "1rem", md: "1.25rem" },
+              lineHeight: { xs: 1.5, sm: 1.6, md: 1.5 },
               px: { xs: 1.5, sm: 2 },
               mt: { xs: 1, md: 0 },
             }}
@@ -184,346 +190,150 @@ export default function HeroSection() {
           }}
         >
           <Grid container spacing={{ xs: 1.5, md: 2 }} alignItems="flex-end">
+            {/* Category Select */}
             <Grid size={{ xs: 12, md: 3.5 }}>
-              <Box>
-                <Box sx={{ position: "relative" }}>
-                  <CategoryIcon
-                    sx={{
-                      position: "absolute",
-                      left: 10,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "primary.main",
-                      fontSize: 18,
-                      zIndex: 1,
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <FormControl
-                    fullWidth
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                        transition: "all 0.3s ease",
-                        pl: 3.5,
-                        pr: 2,
-                        height: "44px",
-                        minHeight: "44px",
-                        display: "flex",
-                        alignItems: "center",
-                        "& .MuiSelect-select": {
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          pr: 4,
-                          fontSize: "0.875rem",
-                          display: "flex",
-                          alignItems: "center",
-                          height: "100%",
-                          paddingLeft: "0px !important",
-                          paddingTop: "0px !important",
-                          paddingBottom: "0px !important",
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 12px rgba(0, 107, 125, 0.15)",
-                        },
-                        "&.Mui-focused": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 16px rgba(0, 107, 125, 0.2)",
-                        },
-                      },
-                    }}
-                  >
-                    <Select
-                      displayEmpty
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                      renderValue={(selected) => {
-                        if (!selected) {
-                          return (
-                            <Box
-                              component="span"
-                              sx={{
-                                color: "rgba(0, 0, 0, 0.5)",
-                                fontSize: "0.875rem",
-                                paddingLeft: "10px",
-                              }}
-                            >
-                              {tForm("travelCategory")}
-                            </Box>
-                          );
-                        }
-                        const value = selected as string;
+              <Box sx={{ position: "relative" }}>
+                <CategoryIcon
+                  sx={{
+                    position: "absolute",
+                    left: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "primary.main",
+                    fontSize: 18,
+                    zIndex: 1,
+                    pointerEvents: "none",
+                  }}
+                />
+                <FormControl fullWidth sx={selectStyles}>
+                  <Select
+                    displayEmpty
+                    value={category}
+                    onChange={(e) => handleCategoryChange(e.target.value)}
+                    MenuProps={menuProps}
+                    renderValue={(selected) => {
+                      if (!selected) {
                         return (
-                          <Box
-                            component="span"
-                            sx={{
-                              fontSize: "0.875rem",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            {value === "beach" && tForm("categories.beach")}
-                            {value === "mountain" &&
-                              tForm("categories.mountain")}
-                            {value === "culture" && tForm("categories.culture")}
-                            {value === "adventure" &&
-                              tForm("categories.adventure")}
+                          <Box component="span" sx={placeholderStyles}>
+                            {tForm("travelCategory")}
                           </Box>
                         );
-                      }}
-                    >
-                      <MenuItem value="beach">
-                        {tForm("categories.beach")}
+                      }
+                      return (
+                        <Box component="span" sx={valueStyles}>
+                          {tForm(`categories.${selected}`)}
+                        </Box>
+                      );
+                    }}
+                  >
+                    {travelCategories.map((cat) => (
+                      <MenuItem key={cat.id} value={cat.id}>
+                        {tForm(`categories.${cat.labelKey}`)}
                       </MenuItem>
-                      <MenuItem value="mountain">
-                        {tForm("categories.mountain")}
-                      </MenuItem>
-                      <MenuItem value="culture">
-                        {tForm("categories.culture")}
-                      </MenuItem>
-                      <MenuItem value="adventure">
-                        {tForm("categories.adventure")}
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
+                    ))}
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
+
+            {/* Destination Select */}
             <Grid size={{ xs: 12, md: 4 }}>
-              <Box>
-                <Box sx={{ position: "relative" }}>
-                  <PlaceIcon
-                    sx={{
-                      position: "absolute",
-                      left: 10,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "primary.main",
-                      fontSize: 18,
-                      zIndex: 1,
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <FormControl
-                    fullWidth
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                        transition: "all 0.3s ease",
-                        pl: 3.5,
-                        pr: 2,
-                        height: "44px",
-                        minHeight: "44px",
-                        display: "flex",
-                        alignItems: "center",
-                        "& .MuiSelect-select": {
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          pr: 4,
-                          fontSize: "0.875rem",
-                          display: "flex",
-                          alignItems: "center",
-                          height: "100%",
-                          paddingLeft: "0px !important",
-                          paddingTop: "0px !important",
-                          paddingBottom: "0px !important",
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 12px rgba(0, 107, 125, 0.15)",
-                        },
-                        "&.Mui-focused": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 16px rgba(0, 107, 125, 0.2)",
-                        },
-                      },
-                    }}
-                  >
-                    <Select
-                      displayEmpty
-                      value={destination}
-                      onChange={(e) => setDestination(e.target.value)}
-                      renderValue={(selected) => {
-                        if (!selected) {
-                          return (
-                            <Box
-                              component="span"
-                              sx={{
-                                color: "rgba(0, 0, 0, 0.5)",
-                                fontSize: "0.875rem",
-                                paddingLeft: "10px",
-                              }}
-                            >
-                              {tForm("selectDestination")}
-                            </Box>
-                          );
-                        }
-                        const value = selected as string;
+              <Box sx={{ position: "relative" }}>
+                <PlaceIcon
+                  sx={{
+                    position: "absolute",
+                    left: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "primary.main",
+                    fontSize: 18,
+                    zIndex: 1,
+                    pointerEvents: "none",
+                  }}
+                />
+                <FormControl fullWidth sx={selectStyles}>
+                  <Select
+                    displayEmpty
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    MenuProps={menuProps}
+                    renderValue={(selected) => {
+                      if (!selected) {
                         return (
-                          <Box
-                            component="span"
-                            sx={{
-                              fontSize: "0.875rem",
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            {value === "gili-trawangan" &&
-                              tForm("destinations.giliTrawangan")}
-                            {value === "mataram" &&
-                              tForm("destinations.mataram")}
-                            {value === "sembalun" &&
-                              tForm("destinations.sembalun")}
-                            {value === "kuta-mandalika" &&
-                              tForm("destinations.kutaMandalika")}
-                            {value === "pink-beach" &&
-                              tForm("destinations.pinkBeach")}
-                            {value === "merese-hill" &&
-                              tForm("destinations.mereseHill")}
+                          <Box component="span" sx={placeholderStyles}>
+                            {tForm("selectDestination")}
                           </Box>
                         );
-                      }}
-                    >
-                      <MenuItem value="gili-trawangan">
-                        {tForm("destinations.giliTrawangan")}
+                      }
+                      const dest = searchDestinations.find(
+                        (d) => d.id === selected
+                      );
+                      return (
+                        <Box component="span" sx={valueStyles}>
+                          {dest
+                            ? tForm(`destinations.${dest.labelKey}`)
+                            : selected}
+                        </Box>
+                      );
+                    }}
+                  >
+                    {filteredDestinations.map((dest) => (
+                      <MenuItem key={dest.id} value={dest.id}>
+                        {tForm(`destinations.${dest.labelKey}`)}
                       </MenuItem>
-                      <MenuItem value="mataram">
-                        {tForm("destinations.mataram")}
-                      </MenuItem>
-                      <MenuItem value="sembalun">
-                        {tForm("destinations.sembalun")}
-                      </MenuItem>
-                      <MenuItem value="kuta-mandalika">
-                        {tForm("destinations.kutaMandalika")}
-                      </MenuItem>
-                      <MenuItem value="pink-beach">
-                        {tForm("destinations.pinkBeach")}
-                      </MenuItem>
-                      <MenuItem value="merese-hill">
-                        {tForm("destinations.mereseHill")}
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
+                    ))}
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
+
+            {/* Duration Select */}
             <Grid size={{ xs: 12, md: 3 }}>
-              <Box>
-                <Box sx={{ position: "relative" }}>
-                  <CalendarIcon
-                    sx={{
-                      position: "absolute",
-                      left: 10,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "primary.main",
-                      fontSize: 18,
-                      zIndex: 1,
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <FormControl
-                    fullWidth
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                        transition: "all 0.3s ease",
-                        pl: 3.5,
-                        pr: 2,
-                        height: "44px",
-                        minHeight: "44px",
-                        display: "flex",
-                        alignItems: "center",
-                        "& .MuiSelect-select": {
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          pr: 4,
-                          fontSize: "0.875rem",
-                          display: "flex",
-                          alignItems: "center",
-                          height: "100%",
-                          paddingLeft: "0px !important",
-                          paddingTop: "0px !important",
-                          paddingBottom: "0px !important",
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 12px rgba(0, 107, 125, 0.15)",
-                        },
-                        "&.Mui-focused": {
-                          backgroundColor: "rgba(255, 255, 255, 1)",
-                          boxShadow: "0 4px 16px rgba(0, 107, 125, 0.2)",
-                        },
-                      },
-                    }}
-                  >
-                    <Select
-                      displayEmpty
-                      value={duration}
-                      onChange={(e) => setDuration(e.target.value)}
-                      renderValue={(value) => {
-                        if (!value) {
-                          return (
-                            <Box
-                              component="span"
-                              sx={{
-                                color: "rgba(0, 0, 0, 0.5)",
-                                fontSize: "0.875rem",
-                                paddingLeft: "10px",
-                              }}
-                            >
-                              {tForm("duration")}
-                            </Box>
-                          );
-                        }
-                        const selected = value as string;
+              <Box sx={{ position: "relative" }}>
+                <CalendarIcon
+                  sx={{
+                    position: "absolute",
+                    left: 10,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "primary.main",
+                    fontSize: 18,
+                    zIndex: 1,
+                    pointerEvents: "none",
+                  }}
+                />
+                <FormControl fullWidth sx={selectStyles}>
+                  <Select
+                    displayEmpty
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    MenuProps={menuProps}
+                    renderValue={(selected) => {
+                      if (!selected) {
                         return (
-                          <Box
-                            component="span"
-                            sx={{
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                              fontSize: "0.875rem",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            {selected === "3d2n" && tForm("durations.3d2n")}
-                            {selected === "5d4n" && tForm("durations.5d4n")}
-                            {selected === "7d6n" && tForm("durations.7d6n")}
-                            {selected === "7plus" && tForm("durations.7plus")}
+                          <Box component="span" sx={placeholderStyles}>
+                            {tForm("duration")}
                           </Box>
                         );
-                      }}
-                    >
-                      <MenuItem value="3d2n">
-                        {tForm("durations.3d2n")}
+                      }
+                      return (
+                        <Box component="span" sx={valueStyles}>
+                          {tForm(`durations.${selected}`)}
+                        </Box>
+                      );
+                    }}
+                  >
+                    {durations.map((dur) => (
+                      <MenuItem key={dur.id} value={dur.id}>
+                        {tForm(`durations.${dur.labelKey}`)}
                       </MenuItem>
-                      <MenuItem value="5d4n">
-                        {tForm("durations.5d4n")}
-                      </MenuItem>
-                      <MenuItem value="7d6n">
-                        {tForm("durations.7d6n")}
-                      </MenuItem>
-                      <MenuItem value="7plus">
-                        {tForm("durations.7plus")}
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
+                    ))}
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
+
+            {/* Search Button */}
             <Grid size={{ xs: 12, md: 1.5 }}>
               <Button
                 variant="contained"
@@ -571,3 +381,63 @@ export default function HeroSection() {
     </Box>
   );
 }
+
+// Shared styles
+const selectStyles = {
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 2,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    transition: "all 0.3s ease",
+    pl: 3.5,
+    pr: 2,
+    height: "44px",
+    minHeight: "44px",
+    display: "flex",
+    alignItems: "center",
+    "& .MuiSelect-select": {
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      pr: 4,
+      fontSize: "0.875rem",
+      display: "flex",
+      alignItems: "center",
+      height: "100%",
+      paddingLeft: "0px !important",
+      paddingTop: "0px !important",
+      paddingBottom: "0px !important",
+    },
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      boxShadow: "0 4px 12px rgba(0, 107, 125, 0.15)",
+    },
+    "&.Mui-focused": {
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      boxShadow: "0 4px 16px rgba(0, 107, 125, 0.2)",
+    },
+  },
+};
+
+const menuProps = {
+  PaperProps: {
+    sx: {
+      maxHeight: 180,
+      borderRadius: 2,
+      mt: 0.5,
+    },
+  },
+};
+
+const placeholderStyles = {
+  color: "rgba(0, 0, 0, 0.5)",
+  fontSize: "0.875rem",
+  paddingLeft: "10px",
+};
+
+const valueStyles = {
+  fontSize: "0.875rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  paddingLeft: "10px",
+};

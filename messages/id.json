@@ -4,7 +4,7 @@
     "home": "Beranda",
     "destinations": "Destinasi",
     "aboutUs": "Tentang Kami",
-    "testimonials": "Testimoni",
+    "transportation": "Transportasi",
     "contact": "Kontak",
     "bookNow": "Pesan Sekarang",
     "destinationsSubmenu": {
@@ -23,23 +23,32 @@
       "findYourJourney": "Cari",
       "categories": {
         "beach": "Liburan Pantai",
-        "mountain": "Pendakian Gunung",
+        "city": "City Tour",
         "culture": "Budaya & Sejarah",
-        "adventure": "Tur Petualangan"
+        "tour": "Tour Perjalanan",
+        "business": "Perjalanan Dinas",
+        "honeymoon": "Honeymoon"
       },
       "destinations": {
+        "mandalika": "Mandalika",
         "giliTrawangan": "Gili Trawangan",
-        "mataram": "Tur Kota Mataram",
-        "sembalun": "Sembalun - Rinjani",
-        "kutaMandalika": "Kuta Mandalika",
+        "giliNanggu": "Gili Nanggu",
+        "giliGede": "Gili Gede",
         "pinkBeach": "Pantai Pink",
-        "mereseHill": "Bukit Merese"
+        "sasakTour": "Sasak Tour",
+        "mataramTour": "Mataram Tour",
+        "benangKelambu": "Air Terjun Benang Kelambu",
+        "senggigi": "Senggigi",
+        "mandalikaCircuit": "Sirkuit Mandalika",
+        "sembalunRinjani": "Sembalun Rinjani"
       },
       "durations": {
+        "2d1n": "2 Hari / 1 Malam",
         "3d2n": "3 Hari / 2 Malam",
+        "4d3n": "4 Hari / 3 Malam",
         "5d4n": "5 Hari / 4 Malam",
-        "7d6n": "7 Hari / 6 Malam",
-        "7plus": "Lebih dari 7 Hari"
+        "6d5n": "6 Hari / 5 Malam",
+        "honeymoon": "Honeymoon"
       }
     }
   },
@@ -66,36 +75,75 @@
     "subtitle": "Temukan destinasi paling dicari di Lombok",
     "viewDetails": "Lihat Detail",
     "from": "Mulai dari",
+    "reviews": "ulasan",
+    "tags": {
+      "beach": "Pantai",
+      "resort": "Resor",
+      "motogp": "MotoGP",
+      "island": "Pulau",
+      "snorkeling": "Snorkeling",
+      "nightlife": "Hiburan",
+      "peaceful": "Tenang",
+      "iconic": "Ikonik",
+      "photography": "Fotografi",
+      "sunset": "Sunset",
+      "family": "Keluarga",
+      "mountain": "Gunung",
+      "trekking": "Pendakian",
+      "nature": "Alam",
+      "culture": "Budaya",
+      "village": "Desa",
+      "tradition": "Tradisi",
+      "city": "Kota",
+      "history": "Sejarah",
+      "waterfall": "Air Terjun",
+      "sport": "Olahraga",
+      "racing": "Balap"
+    },
     "items": {
+      "mandalika": {
+        "title": "Mandalika",
+        "description": "Kawasan wisata terpadu dengan pantai indah, resor mewah, dan Sirkuit MotoGP kelas dunia."
+      },
       "giliTrawangan": {
-        "name": "Gili Trawangan",
-        "description": "Air jernih, kehidupan malam yang semarak, dan matahari terbenam yang menakjubkan menanti Anda.",
-        "price": "299"
+        "title": "Gili Trawangan",
+        "description": "Pulau tropis favorit dengan pasir putih, snorkeling, dan kehidupan malam yang hidup."
       },
-      "mountRinjani": {
-        "name": "Pendakian Gunung Rinjani",
-        "description": "Tantang diri Anda dengan pendakian yang tak terlupakan ke puncak Gunung Rinjani.",
-        "price": "399"
+      "giliNanggu": {
+        "title": "Gili Nanggu",
+        "description": "Pulau kecil yang tenang dengan air laut jernih, cocok untuk relaksasi dan snorkeling."
       },
-      "kutaMandalika": {
-        "name": "Kuta Mandalika",
-        "description": "Pantai yang masih asri, sempurna untuk berselancar, relaksasi, dan olahraga air.",
-        "price": "249"
+      "giliGede": {
+        "title": "Gili Gede",
+        "description": "Pulau terbesar di selatan Lombok dengan keindahan alam yang masih asri dan suasana tenang."
       },
       "pinkBeach": {
-        "name": "Pantai Pink",
-        "description": "Rasakan keunikan pantai berpasir pink, keajaiban alam Lombok.",
-        "price": "199"
+        "title": "Pantai Pink",
+        "description": "Pantai unik dengan pasir berwarna merah muda dan panorama laut yang eksotis."
       },
-      "sembalunValley": {
-        "name": "Lembah Sembalun",
-        "description": "Jelajahi lembah dataran tinggi yang indah dengan teras sawah dan pemandangan gunung yang menakjubkan.",
-        "price": "349"
+      "sasakTour": {
+        "title": "Sasak Tour",
+        "description": "Jelajahi desa-desa tradisional Sasak dan pelajari budaya serta kerajinan tangan khas Lombok."
       },
-      "mereseHill": {
-        "name": "Bukit Merese",
-        "description": "Saksikan pemandangan panorama yang menakjubkan dari lautan dan pulau-pulau sekitarnya.",
-        "price": "179"
+      "mataramTour": {
+        "title": "Mataram Tour",
+        "description": "Eksplorasi ibu kota Lombok dengan sejarah kerajaan, pura-pura kuno, dan kuliner lokal."
+      },
+      "benangKelambu": {
+        "title": "Air Terjun Benang Kelambu",
+        "description": "Air terjun menakjubkan dengan tirai air alami yang indah di tengah hutan tropis."
+      },
+      "senggigi": {
+        "title": "Senggigi",
+        "description": "Destinasi wisata klasik Lombok dengan sunset indah dan fasilitas lengkap."
+      },
+      "mandalikaCircuit": {
+        "title": "Sirkuit Mandalika",
+        "description": "Sirkuit balap internasional MotoGP dengan fasilitas modern dan pemandangan laut."
+      },
+      "sembalunRinjani": {
+        "title": "Sembalun Rinjani",
+        "description": "Desa pegunungan di kaki Gunung Rinjani, gerbang utama pendakian dan wisata alam."
       }
     }
   },
@@ -165,5 +213,59 @@
         "optional": "Aktivitas Opsional"
       }
     }
+  },
+  "transportation": {
+    "badge": "Sewa Kendaraan",
+    "title": "Layanan Transportasi",
+    "subtitle": "Jelajahi Lombok dengan nyaman menggunakan armada kendaraan kami yang terawat baik. Dilengkapi supir berpengalaman yang ramah dan mengenal seluruh destinasi wisata di Lombok.",
+    "durationInfo": "Semua paket sewa berlaku untuk 12 jam perjalanan",
+    "persons": "orang",
+    "hours": "jam",
+    "hour": "jam",
+    "includesLabel": "Termasuk",
+    "free": "Gratis",
+    "extraTime": "Overtime",
+    "extraArea": "Biaya tambahan",
+    "bookViaWhatsApp": "Pesan via WhatsApp",
+    "needHelp": "Butuh Bantuan?",
+    "needHelpDesc": "Tim kami siap membantu Anda memilih kendaraan yang tepat untuk perjalanan Anda di Lombok.",
+    "contactUs": "Hubungi Kami",
+    "includes": {
+      "car": "Mobil",
+      "fuel": "Bensin",
+      "driver": "Supir"
+    },
+    "freeItems": {
+      "mineralWater": "Air Mineral"
+    }
+  },
+  "contactPage": {
+    "title": "Hubungi Kami",
+    "subtitle": "Kami siap membantu merencanakan liburan impian Anda di Lombok. Hubungi kami melalui formulir di bawah ini atau melalui kontak langsung.",
+    "form": {
+      "name": "Nama Lengkap",
+      "email": "Alamat Email",
+      "phone": "Nomor WhatsApp",
+      "subject": "Subjek Pesan",
+      "message": "Pesan Anda",
+      "send": "Kirim Pesan",
+      "success": "Pesan berhasil dibuat! Mengalihkan ke WhatsApp...",
+      "title": "Kirim Pesan"
+    },
+    "info": {
+      "office": "Kantor Kami",
+      "address": "Jl. Pariwisata Pantai Kuta, Mandalika, Lombok Tengah, NTB 83573",
+      "phone": "Telepon & WhatsApp",
+      "email": "Email Kami",
+      "operationHours": "Jam Operasional",
+      "hours": "Setiap Hari: 08.00 - 22.00 WITA"
+    }
+  },
+  "footer": {
+    "description": "Sasak Journey adalah teman perjalanan terbaik anda di Lombok. Kami menyediakan paket wisata dan transportasi terbaik untuk pengalaman liburan tak terlupakan.",
+    "quickLinks": "Tautan Cepat",
+    "contact": "Hubungi Kami",
+    "followUs": "Ikuti Kami",
+    "copyright": "Sasak Journey. Hak Cipta Dilindungi Undang-Undang."
   }
 }

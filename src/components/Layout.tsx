@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 interface LayoutProps {
@@ -12,6 +13,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 }

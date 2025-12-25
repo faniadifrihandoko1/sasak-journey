@@ -1,33 +1,34 @@
 "use client";
 
+import { formatPrice } from "@/data/destinations";
+import { Link } from "@/i18n/navigation";
+import {
+  ArrowBack as ArrowBackIcon,
+  CalendarToday as CalendarIcon,
+  Cancel as CancelIcon,
+  CheckCircle as CheckIcon,
+  Place as PlaceIcon,
+  WhatsApp as WhatsAppIcon,
+} from "@mui/icons-material";
 import {
   Box,
-  Container,
-  Typography,
-  Grid,
   Button,
-  Paper,
+  Card,
+  CardContent,
   Chip,
+  Container,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Card,
-  CardContent,
+  Paper,
+  Typography,
 } from "@mui/material";
-import {
-  Star as StarIcon,
-  Place as PlaceIcon,
-  CalendarToday as CalendarIcon,
-  CheckCircle as CheckIcon,
-  Cancel as CancelIcon,
-  ArrowBack as ArrowBackIcon,
-} from "@mui/icons-material";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { Link } from "@/i18n/navigation";
 
 // Mock destination data
 const destinationData: Record<
@@ -42,8 +43,6 @@ const destinationData: Record<
     days: number;
     nights: number;
     price: number;
-    rating: number;
-    reviews: number;
     image: string;
     gallery: string[];
     description: string;
@@ -54,18 +53,16 @@ const destinationData: Record<
     excluded: string[];
   }
 > = {
-  "gili-trawangan": {
+  mandalika: {
     id: "1",
-    name: "Gili Trawangan Paradise",
-    slug: "gili-trawangan",
+    name: "Mandalika Beach Resort",
+    slug: "mandalika",
     category: "beach",
-    destination: "gili-trawangan",
+    destination: "mandalika",
     duration: "3d2n",
     days: 3,
     nights: 2,
-    price: 299,
-    rating: 4.8,
-    reviews: 124,
+    price: 4500000,
     image:
       "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200",
     gallery: [
@@ -75,99 +72,284 @@ const destinationData: Record<
       "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
     ],
     description:
-      "Crystal clear waters, vibrant nightlife, and stunning sunsets await you.",
+      "Kawasan wisata terpadu dengan pantai indah, resor mewah, dan Sirkuit MotoGP kelas dunia.",
     longDescription:
-      "Experience the ultimate tropical paradise on Gili Trawangan, the largest of the three Gili Islands. This car-free island offers pristine beaches, world-class diving spots, and a vibrant atmosphere perfect for both relaxation and adventure. Snorkel with sea turtles, enjoy sunset views, and immerse yourself in the laid-back island culture.",
+      "Mandalika adalah kawasan ekonomi khusus pariwisata yang terletak di Lombok Tengah. Dengan pantai-pantai eksotis seperti Pantai Kuta, resort berbintang, dan Sirkuit Mandalika yang menjadi tuan rumah MotoGP, destinasi ini menawarkan pengalaman liburan lengkap untuk semua kalangan.",
     highlights: [
-      "Snorkeling with sea turtles",
-      "Stunning sunset views",
-      "Vibrant nightlife scene",
-      "Crystal clear turquoise waters",
-      "Bicycle tours around the island",
+      "Pantai Kuta Mandalika yang eksotis",
+      "Sirkuit MotoGP kelas dunia",
+      "Resort dan hotel berbintang",
+      "Sunset spektakuler",
+      "Water sports dan aktivitas pantai",
     ],
     itinerary: [
       {
         day: 1,
-        title: "Arrival & Beach Time",
+        title: "Kedatangan & Pantai",
         description:
-          "Arrive at Gili Trawangan, check into your accommodation, and spend the day relaxing on the beautiful beaches.",
+          "Tiba di Mandalika, check-in hotel, dan nikmati sore hari di Pantai Kuta Mandalika.",
       },
       {
         day: 2,
-        title: "Snorkeling Adventure",
+        title: "Eksplorasi & Water Sports",
         description:
-          "Full-day snorkeling trip to see sea turtles and colorful marine life. Visit the best snorkeling spots around the Gili Islands.",
+          "Hari penuh aktivitas pantai, snorkeling, dan mengunjungi Sirkuit Mandalika.",
       },
       {
         day: 3,
-        title: "Island Exploration & Departure",
+        title: "Relaksasi & Kepulangan",
         description:
-          "Explore the island by bicycle, visit local shops, and enjoy a final swim before departure.",
+          "Waktu bebas untuk spa atau belanja oleh-oleh sebelum kepulangan.",
       },
     ],
     included: ["accommodation", "meals", "transportation", "guide", "entrance"],
     excluded: ["flights", "personal", "tips", "optional"],
   },
-  "mount-rinjani": {
+  "gili-trawangan": {
     id: "2",
-    name: "Mount Rinjani Summit Trek",
-    slug: "mount-rinjani",
-    category: "mountain",
-    destination: "sembalun",
-    duration: "5d4n",
-    days: 5,
-    nights: 4,
-    price: 399,
-    rating: 4.9,
-    reviews: 89,
+    name: "Gili Trawangan Paradise",
+    slug: "gili-trawangan",
+    category: "beach",
+    destination: "gili-trawangan",
+    duration: "3d2n",
+    days: 3,
+    nights: 2,
+    price: 3800000,
     image:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200",
     gallery: [
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800",
-      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
       "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
     ],
     description:
-      "Challenge yourself with an unforgettable trek to the summit of Mount Rinjani.",
+      "Pulau tropis favorit dengan pasir putih, snorkeling, dan kehidupan malam yang hidup.",
     longDescription:
-      "Embark on an epic journey to conquer Mount Rinjani, Indonesia's second-highest volcano. This challenging trek rewards you with breathtaking views, stunning sunrises, and the experience of a lifetime. Perfect for adventure seekers and nature lovers.",
+      "Gili Trawangan adalah pulau terbesar dari tiga Gili Islands yang terkenal dengan keindahan alamnya. Pulau bebas kendaraan bermotor ini menawarkan pantai berpasir putih, spot diving dan snorkeling kelas dunia, serta suasana yang sempurna untuk relaksasi dan petualangan.",
     highlights: [
-      "Summit sunrise view",
-      "Crater lake Segara Anak",
-      "Hot springs",
-      "Professional guide and porter",
-      "Camping under the stars",
+      "Snorkeling dengan penyu laut",
+      "Sunset view menakjubkan",
+      "Nightlife yang menghibur",
+      "Air laut jernih berwarna turquoise",
+      "Keliling pulau dengan sepeda",
     ],
     itinerary: [
       {
         day: 1,
-        title: "Start Trekking",
+        title: "Kedatangan & Pantai",
         description:
-          "Begin your adventure from Sembalun village, trek to Pos 1 and Pos 2, then continue to Base Camp.",
+          "Tiba di Gili Trawangan, check-in akomodasi, dan habiskan hari dengan bersantai di pantai.",
       },
       {
         day: 2,
-        title: "Summit Push",
+        title: "Snorkeling Adventure",
         description:
-          "Early morning summit push to catch the sunrise, then descend to the crater rim.",
+          "Trip snorkeling seharian melihat penyu laut dan kehidupan laut yang berwarna-warni.",
       },
       {
         day: 3,
-        title: "Crater Lake",
+        title: "Eksplorasi & Kepulangan",
         description:
-          "Visit Segara Anak crater lake and enjoy the hot springs before continuing descent.",
+          "Keliling pulau dengan sepeda, kunjungi toko lokal, dan berenang terakhir sebelum pulang.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "gili-nanggu": {
+    id: "3",
+    name: "Gili Nanggu Escape",
+    slug: "gili-nanggu",
+    category: "beach",
+    destination: "gili-nanggu",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 3200000,
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+    ],
+    description:
+      "Pulau kecil yang tenang dengan air laut jernih, cocok untuk relaksasi dan snorkeling.",
+    longDescription:
+      "Gili Nanggu adalah pulau tersembunyi di barat daya Lombok yang menawarkan ketenangan jauh dari keramaian. Dengan pantai berpasir putih, terumbu karang yang masih alami, dan suasana yang damai, pulau ini sempurna untuk pasangan atau siapa saja yang mencari ketenangan.",
+    highlights: [
+      "Pulau privat dan tenang",
+      "Terumbu karang yang masih asri",
+      "Snorkeling di perairan jernih",
+      "Suasana romantis untuk honeymoon",
+      "Sunset yang memukau",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Kedatangan & Snorkeling",
+        description:
+          "Perjalanan ke Gili Nanggu, snorkeling di terumbu karang, dan menikmati sunset.",
+      },
+      {
+        day: 2,
+        title: "Relaksasi & Kepulangan",
+        description:
+          "Waktu bebas untuk bersantai di pantai sebelum kembali ke Lombok.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "pink-beach": {
+    id: "4",
+    name: "Pink Beach Adventure",
+    slug: "pink-beach",
+    category: "beach",
+    destination: "pink-beach",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 3500000,
+    image:
+      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+    ],
+    description:
+      "Pantai unik dengan pasir berwarna merah muda dan panorama laut yang eksotis.",
+    longDescription:
+      "Pantai Pink (Tangsi Beach) adalah salah satu dari sedikit pantai berpasir merah muda di dunia. Warna unik pasirnya berasal dari pecahan terumbu karang merah yang bercampur dengan pasir putih. Destinasi ini menawarkan keindahan alam yang langka dan pengalaman fotografi yang tak terlupakan.",
+    highlights: [
+      "Pasir berwarna pink yang unik",
+      "Panorama laut yang eksotis",
+      "Spot fotografi terbaik",
+      "Snorkeling dengan ikan warna-warni",
+      "Keindahan alam yang langka",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Perjalanan ke Pantai Pink",
+        description:
+          "Perjalanan menuju Lombok Timur, eksplorasi Pantai Pink, snorkeling dan menikmati sunset.",
+      },
+      {
+        day: 2,
+        title: "Eksplorasi & Kepulangan",
+        description:
+          "Waktu bebas untuk foto-foto dan berenang sebelum kembali.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  senggigi: {
+    id: "5",
+    name: "Senggigi Beach Getaway",
+    slug: "senggigi",
+    category: "beach",
+    destination: "senggigi",
+    duration: "3d2n",
+    days: 3,
+    nights: 2,
+    price: 3000000,
+    image:
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+    ],
+    description:
+      "Destinasi wisata klasik Lombok dengan sunset indah dan fasilitas lengkap.",
+    longDescription:
+      "Senggigi adalah kawasan wisata paling terkenal di Lombok Barat. Dengan garis pantai yang panjang, berbagai resort dan hotel, restoran, serta akses mudah ke Gili Islands, Senggigi adalah pilihan sempurna untuk liburan keluarga atau sebagai base camp menjelajahi Lombok.",
+    highlights: [
+      "Sunset spektakuler",
+      "Akses mudah ke Gili Islands",
+      "Berbagai pilihan resort",
+      "Kuliner seafood segar",
+      "Cocok untuk keluarga",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Kedatangan & Eksplorasi",
+        description:
+          "Tiba di Senggigi, check-in hotel, dan eksplorasi pantai sore hari.",
+      },
+      {
+        day: 2,
+        title: "Day Trip Gili",
+        description:
+          "Opsional day trip ke Gili Islands atau aktivitas di Senggigi.",
+      },
+      {
+        day: 3,
+        title: "Relaksasi & Kepulangan",
+        description:
+          "Waktu bebas untuk spa, belanja, atau berenang sebelum pulang.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "sembalun-rinjani": {
+    id: "6",
+    name: "Sembalun Rinjani Trek",
+    slug: "sembalun-rinjani",
+    category: "tour",
+    destination: "sembalun-rinjani",
+    duration: "4d3n",
+    days: 4,
+    nights: 3,
+    price: 4200000,
+    image:
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
+    ],
+    description:
+      "Desa pegunungan di kaki Gunung Rinjani, gerbang utama pendakian dan wisata alam.",
+    longDescription:
+      "Sembalun adalah desa pegunungan yang menjadi gerbang utama untuk pendakian Gunung Rinjani. Dengan pemandangan lembah hijau, udara sejuk pegunungan, dan akses ke jalur pendakian terbaik, Sembalun menawarkan pengalaman wisata alam yang tak terlupakan bagi para pecinta adventure.",
+    highlights: [
+      "Pendakian Gunung Rinjani",
+      "Sunrise dari puncak",
+      "Danau Segara Anak",
+      "Pemandangan lembah hijau",
+      "Camping di bawah bintang",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Mulai Pendakian",
+        description:
+          "Perjalanan dari Sembalun, trekking ke Pos 1 dan Pos 2, lanjut ke Base Camp.",
+      },
+      {
+        day: 2,
+        title: "Summit Attack",
+        description:
+          "Pendakian pagi-pagi untuk menyaksikan sunrise dari puncak, lalu turun ke crater rim.",
+      },
+      {
+        day: 3,
+        title: "Danau Segara Anak",
+        description:
+          "Kunjungi danau kawah dan nikmati hot springs sebelum melanjutkan turun.",
       },
       {
         day: 4,
-        title: "Senaru Route",
+        title: "Kepulangan",
         description:
-          "Continue descending via Senaru route with beautiful forest scenery.",
-      },
-      {
-        day: 5,
-        title: "Return",
-        description:
-          "Final descent to Senaru village and return to your hotel.",
+          "Turun via jalur Senaru dan kembali ke hotel.",
       },
     ],
     included: [
@@ -178,6 +360,231 @@ const destinationData: Record<
       "entrance",
       "insurance",
     ],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "gili-gede": {
+    id: "7",
+    name: "Gili Gede Escape",
+    slug: "gili-gede",
+    category: "beach",
+    destination: "gili-gede",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 2800000,
+    image:
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
+    ],
+    description:
+      "Pulau terbesar di selatan Lombok dengan keindahan alam yang masih asri dan suasana tenang.",
+    longDescription:
+      "Gili Gede adalah pulau terbesar di antara pulau-pulau kecil di selatan Lombok. Pulau ini menawarkan keindahan alam yang masih alami, terumbu karang yang sehat, dan kehidupan masyarakat lokal yang ramah. Cocok untuk yang mencari ketenangan dan pengalaman otentik.",
+    highlights: [
+      "Pulau terbesar di selatan Lombok",
+      "Terumbu karang yang sehat",
+      "Kehidupan lokal autentik",
+      "Suasana tenang dan damai",
+      "Snorkeling dan diving",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Kedatangan & Eksplorasi",
+        description:
+          "Perjalanan ke Gili Gede, check-in, snorkeling, dan menikmati sunset.",
+      },
+      {
+        day: 2,
+        title: "Island Tour & Kepulangan",
+        description:
+          "Keliling pulau, berinteraksi dengan warga lokal, lalu kembali ke Lombok.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "sasak-tour": {
+    id: "8",
+    name: "Sasak Village Tour",
+    slug: "sasak-tour",
+    category: "culture",
+    destination: "sasak-tour",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 1500000,
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800",
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+    ],
+    description:
+      "Jelajahi desa-desa tradisional Sasak dan pelajari budaya serta kerajinan tangan khas Lombok.",
+    longDescription:
+      "Sasak Tour membawa Anda mengenal lebih dekat budaya dan tradisi suku Sasak yang merupakan penduduk asli Lombok. Kunjungi desa-desa tradisional seperti Sade dan Ende, pelajari teknik tenun khas Lombok, dan nikmati keramahan penduduk lokal.",
+    highlights: [
+      "Kunjungan desa tradisional Sade",
+      "Belajar tenun songket",
+      "Melihat rumah adat Sasak",
+      "Interaksi dengan penduduk lokal",
+      "Kuliner tradisional Sasak",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Eksplorasi Desa Sasak",
+        description:
+          "Kunjungi Desa Sade dan Ende, pelajari budaya dan kerajinan lokal.",
+      },
+      {
+        day: 2,
+        title: "Workshop & Kepulangan",
+        description:
+          "Ikuti workshop tenun, cooking class masakan Sasak, lalu kembali.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "mataram-tour": {
+    id: "9",
+    name: "Mataram City Tour",
+    slug: "mataram-tour",
+    category: "city",
+    destination: "mataram-tour",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 1200000,
+    image:
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=800",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800",
+    ],
+    description:
+      "Eksplorasi ibu kota Lombok dengan sejarah kerajaan, pura-pura kuno, dan kuliner lokal.",
+    longDescription:
+      "Mataram Tour mengajak Anda menjelajahi ibu kota Lombok dan sekitarnya. Kunjungi Pura Meru, Taman Mayura, Islamic Center, dan nikmati kuliner khas Lombok. Tour ini cocok untuk Anda yang ingin mengenal sisi urban dan historis Lombok.",
+    highlights: [
+      "Pura Meru - pura terbesar di Lombok",
+      "Taman Mayura dan kolam",
+      "Islamic Center NTB",
+      "Kuliner Taliwang",
+      "Pusat oleh-oleh Lombok",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Wisata Sejarah & Budaya",
+        description:
+          "Kunjungi Pura Meru, Taman Mayura, dan Islamic Center.",
+      },
+      {
+        day: 2,
+        title: "Kuliner & Belanja",
+        description:
+          "Tour kuliner dan belanja oleh-oleh khas Lombok.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "benang-kelambu": {
+    id: "10",
+    name: "Benang Kelambu Waterfall",
+    slug: "benang-kelambu",
+    category: "tour",
+    destination: "benang-kelambu",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 1800000,
+    image:
+      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=800",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
+    ],
+    description:
+      "Air terjun menakjubkan dengan tirai air alami yang indah di tengah hutan tropis.",
+    longDescription:
+      "Air Terjun Benang Kelambu adalah salah satu air terjun terindah di Lombok. Namanya berasal dari bentuk air yang jatuh menyerupai tirai (kelambu). Terletak di lereng Gunung Rinjani, air terjun ini dikelilingi hutan tropis yang asri dan udara sejuk pegunungan.",
+    highlights: [
+      "Air terjun berbentuk tirai",
+      "Hutan tropis yang asri",
+      "Udara sejuk pegunungan",
+      "Trekking ringan",
+      "Spot foto instagramable",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Perjalanan & Trekking",
+        description:
+          "Perjalanan ke lokasi, trekking menuju air terjun, dan menikmati keindahan alam.",
+      },
+      {
+        day: 2,
+        title: "Eksplorasi & Kepulangan",
+        description:
+          "Eksplorasi sekitar, kunjungi Benang Stokel, lalu kembali.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
+    excluded: ["flights", "personal", "tips", "optional"],
+  },
+  "mandalika-circuit": {
+    id: "11",
+    name: "Mandalika Circuit Experience",
+    slug: "mandalika-circuit",
+    category: "city",
+    destination: "mandalika-circuit",
+    duration: "2d1n",
+    days: 2,
+    nights: 1,
+    price: 2500000,
+    image:
+      "https://images.unsplash.com/photo-1558618047-f4b511d0397b?q=80&w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1558618047-f4b511d0397b?q=80&w=800",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=800",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+    ],
+    description:
+      "Sirkuit balap internasional MotoGP dengan fasilitas modern dan pemandangan laut.",
+    longDescription:
+      "Sirkuit Mandalika adalah sirkuit balap kelas dunia yang menjadi tuan rumah MotoGP sejak 2022. Nikmati pengalaman melihat sirkuit dari dekat, foto di berbagai spot ikonik, dan rasakan atmosfer balap internasional dengan latar belakang pemandangan laut yang menakjubkan.",
+    highlights: [
+      "Tour sirkuit MotoGP",
+      "Foto di paddock area",
+      "Museum dan galeri MotoGP",
+      "Pemandangan laut dari sirkuit",
+      "Pengalaman VIP area",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: "Circuit Tour",
+        description:
+          "Tour lengkap sirkuit, kunjungi paddock, pit lane, dan tribun utama.",
+      },
+      {
+        day: 2,
+        title: "Pantai & Kepulangan",
+        description:
+          "Nikmati pantai sekitar Mandalika sebelum kembali.",
+      },
+    ],
+    included: ["accommodation", "meals", "transportation", "guide", "entrance"],
     excluded: ["flights", "personal", "tips", "optional"],
   },
 };
@@ -225,21 +632,28 @@ export default function DestinationDetailPage() {
   const getCategoryLabel = (value: string) => {
     const map: Record<string, string> = {
       beach: tCategories("beach"),
-      mountain: tCategories("mountain"),
+      city: tCategories("city"),
       culture: tCategories("culture"),
-      adventure: tCategories("adventure"),
+      tour: tCategories("tour"),
+      business: tCategories("business"),
+      honeymoon: tCategories("honeymoon"),
     };
     return map[value] || value;
   };
 
   const getDestinationLabel = (value: string) => {
     const map: Record<string, string> = {
+      mandalika: tDestinations("mandalika"),
       "gili-trawangan": tDestinations("giliTrawangan"),
-      mataram: tDestinations("mataram"),
-      sembalun: tDestinations("sembalun"),
-      "kuta-mandalika": tDestinations("kutaMandalika"),
+      "gili-nanggu": tDestinations("giliNanggu"),
+      "gili-gede": tDestinations("giliGede"),
       "pink-beach": tDestinations("pinkBeach"),
-      "merese-hill": tDestinations("mereseHill"),
+      "sasak-tour": tDestinations("sasakTour"),
+      "mataram-tour": tDestinations("mataramTour"),
+      "benang-kelambu": tDestinations("benangKelambu"),
+      senggigi: tDestinations("senggigi"),
+      "mandalika-circuit": tDestinations("mandalikaCircuit"),
+      "sembalun-rinjani": tDestinations("sembalunRinjani"),
     };
     return map[value] || value;
   };
@@ -294,19 +708,6 @@ export default function DestinationDetailPage() {
                   style={{ objectFit: "cover" }}
                   priority
                 />
-                {destination.rating >= 4.8 && (
-                  <Chip
-                    label="Popular"
-                    color="secondary"
-                    size="small"
-                    sx={{
-                      position: "absolute",
-                      top: 12,
-                      right: 12,
-                      fontWeight: 600,
-                    }}
-                  />
-                )}
               </Box>
             </Grid>
 
@@ -356,9 +757,8 @@ export default function DestinationDetailPage() {
                   />
                   <Chip
                     icon={<CalendarIcon fontSize="small" />}
-                    label={`${destination.days} ${t("days")} / ${
-                      destination.nights
-                    } ${t("nights")}`}
+                    label={`${destination.days} ${t("days")} / ${destination.nights
+                      } ${t("nights")}`}
                     size="small"
                     variant="outlined"
                     sx={{ fontSize: "0.75rem" }}
@@ -379,25 +779,10 @@ export default function DestinationDetailPage() {
                       color="primary.main"
                       fontWeight={700}
                     >
-                      ${destination.price}
+                      {formatPrice(destination.price, "IDR")}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
                       {t("perPerson")}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                    }}
-                  >
-                    <StarIcon sx={{ fontSize: 18, color: "#FFC107" }} />
-                    <Typography variant="body2" fontWeight={600}>
-                      {destination.rating}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      ({destination.reviews})
                     </Typography>
                   </Box>
                 </Box>
@@ -405,29 +790,29 @@ export default function DestinationDetailPage() {
                 <Box sx={{ display: "flex", gap: 1 }}>
                   <Button
                     variant="contained"
-                    color="secondary"
                     fullWidth
-                    size="medium"
+                    size="large"
+                    startIcon={<WhatsAppIcon />}
+                    href={`https://wa.me/6287773931343?text=${encodeURIComponent(
+                      `Halo, saya tertarik dengan paket wisata ${destination.name}. Bolehkah saya minta informasi lebih lanjut mengenai ketersediaan dan detail harganya?`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     sx={{
                       textTransform: "none",
-                      fontWeight: 600,
-                      py: 1,
+                      fontWeight: 700,
+                      py: 1.5,
+                      borderRadius: 2,
+                      background: "linear-gradient(45deg, #128C7E 30%, #075E54 90%)",
+                      boxShadow: "0 3px 5px 2px rgba(37, 211, 102, .3)",
+                      color: "white",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(45deg, #075E54 30%, #128C7E 90%)",
+                      },
                     }}
                   >
-                    {t("bookNow")}
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                    size="medium"
-                    sx={{
-                      textTransform: "none",
-                      fontWeight: 600,
-                      py: 1,
-                    }}
-                  >
-                    {t("contactUs")}
+                    Pesan Sekarang via WhatsApp
                   </Button>
                 </Box>
               </CardContent>
