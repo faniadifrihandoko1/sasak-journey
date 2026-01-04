@@ -117,7 +117,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "mandalika",
         slug: "mandalika",
-        image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=800",
+        image: "https://ik.imgkit.net/3vlqs5axxjf/external/https://www.cfmedia.vfmleonardo.com/imageRepo/1/0/206/473/299/B1NyCt9vi0SpsWXTR0jPw_a1k2_ho_00_p_3000x2250_O.jpg?tr=w-940%2Ch-529%2Cfo-auto%2Cdi-ami-fallback.png",
         priceFrom: 4500000,
         currency: "IDR",
         location: "Lombok Tengah, NTB",
@@ -127,7 +127,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "giliTrawangan",
         slug: "gili-trawangan",
-        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800",
+        image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQLZPu6Aul1am6jriYgNGZhXfGhuUCl3PsSoXC2ibF7xQj5n0gBgxPWHJbojfxKWmAaFM7Msbrx1blMmOC0N99w_ZAoeUeDT4zyA9pVZGeSZSgxAWmxkWqrBY0ubJxf2Qrff4bdTVdgLc/s1600/Gili+Trawangan+3.jpg",
         priceFrom: 3800000,
         currency: "IDR",
         location: "Lombok Utara, NTB",
@@ -137,7 +137,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "giliNanggu",
         slug: "gili-nanggu",
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800",
+        image: "https://zjglidcehtsqqqhbdxyp.supabase.co/storage/v1/object/public/atourin/images/destination/lombok/gili-nanggu-profile1645778199.png?x-image-process=image/resize,p_100,limit_1/imageslim",
         priceFrom: 3200000,
         currency: "IDR",
         location: "Lombok Barat, NTB",
@@ -147,7 +147,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "giliGede",
         slug: "gili-gede",
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800",
+        image: "https://image.idntimes.com/post/20230110/images-2023-01-10t132811169-d3d8d06aa1448f3fe68a341e3dbae61d.jpeg",
         priceFrom: 2800000,
         currency: "IDR",
         location: "Lombok Barat, NTB",
@@ -157,7 +157,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "pinkBeach",
         slug: "pink-beach",
-        image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=800",
+        image: "https://lombokindotrans.com/wp-content/uploads/2024/03/Pantai-Pink-Lombok.jpg",
         priceFrom: 3500000,
         currency: "IDR",
         location: "Lombok Timur, NTB",
@@ -167,7 +167,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "sasakTour",
         slug: "sasak-tour",
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800",
+        image: "https://authentic-indonesia.com/wp-content/uploads/2018/04/The-Traditional-Villages-of-Lombok.jpg",
         priceFrom: 1500000,
         currency: "IDR",
         location: "Lombok Tengah, NTB",
@@ -177,7 +177,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "mataramTour",
         slug: "mataram-tour",
-        image: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?q=80&w=800",
+        image: "https://s3.nevaobjects.id/wp-content/uploads/2025/11/kota-mataram-2842322492.webp",
         priceFrom: 1200000,
         currency: "IDR",
         location: "Mataram, NTB",
@@ -187,7 +187,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "benangKelambu",
         slug: "benang-kelambu",
-        image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?q=80&w=800",
+        image: "https://ik.imagekit.io/tvlk/blog/2022/01/Wisata-Air-Terjun-Lombok-Benang-Kelambu-Shutterstock.jpg?tr=q-70,c-at_max,w-1000,h-600",
         priceFrom: 1800000,
         currency: "IDR",
         location: "Lombok Tengah, NTB",
@@ -197,7 +197,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "senggigi",
         slug: "senggigi",
-        image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=800",
+        image: "https://thelangkahtravel.com/wp-content/uploads/2020/03/Pantai-Senggigi-Lombok-2.jpg",
         priceFrom: 3000000,
         currency: "IDR",
         location: "Lombok Barat, NTB",
@@ -207,7 +207,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "mandalikaCircuit",
         slug: "mandalika-circuit",
-        image: "https://images.unsplash.com/photo-1558618047-f4b511d0397b?q=80&w=800",
+        image: "https://www.lazone.id/storage/news/2024/Agustus/Sport/keren-abis-ini-5-rahasia-gokil-sirkuit-motogp-mandalika/orig-Sirkuit%20MotoGP%20Mandalika%20di%20Lombok.jpg",
         priceFrom: 2500000,
         currency: "IDR",
         location: "Lombok Tengah, NTB",
@@ -217,7 +217,7 @@ export const popularDestinations: PopularDestination[] = [
     {
         key: "sembalunRinjani",
         slug: "sembalun-rinjani",
-        image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800",
+        image: "https://mediaim.expedia.com/destination/1/e34d20eb8465a1d809dbdb6104de2587.jpg",
         priceFrom: 4200000,
         currency: "IDR",
         location: "Lombok Timur, NTB",
